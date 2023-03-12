@@ -1,3 +1,5 @@
+import static endpoints.Endpoints.AUTH_LOGIN;
+
 import io.restassured.RestAssured;
 import models.login.LoginRequestModel;
 import models.login.LoginResponseModel;
@@ -15,7 +17,7 @@ public class FirstTest extends BaseTest {
     LoginResponseModel loginResponseModel = RestAssured
         .given()
         .body(requestModel)
-        .post("/auth/login")
+        .post(AUTH_LOGIN)
         .then()
         .statusCode(200)
         .extract()
