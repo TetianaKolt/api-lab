@@ -3,7 +3,6 @@ package endpoints;
 import lombok.Data;
 import lombok.Getter;
 
-@Data
 public class Endpoints {
 
   public static String AUTH_LOGIN = "/auth/login";

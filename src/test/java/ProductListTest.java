@@ -1,4 +1,5 @@
 import io.restassured.RestAssured;
+import models.products.ProductModel;
 import models.products.ProductResponseModel;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
@@ -29,27 +30,29 @@ public class ProductListTest extends BaseTest {
         .isEqualTo(30);
 
     //every product has not null [id]
-    softAssertions.assertThat(
-            products.getProducts().stream().allMatch(product -> product.getId() != null))
+    softAssertions.assertThat(products.getProducts())
+        .map(ProductModel::getId)
         .as("[id] of the product(s) is null")
-        .isTrue();
+        .doesNotContainNull();
 
     //every product has not null or not empty [title]
-    softAssertions.assertThat(products.getProducts().stream()
-            .allMatch((product -> product.getTitle() != null || !product.getTitle().isEmpty())))
+    softAssertions.assertThat(products.getProducts())
+        .map(ProductModel::getTitle)
         .as("Product(s) have(has) empty [title]")
-        .isTrue();
+        .doesNotContainNull()
+        .isNotEmpty();
 
     //every product has not null [price]
-    softAssertions.assertThat(products.getProducts().stream()
-            .allMatch((product -> product.getPrice() != null)))
+    softAssertions.assertThat(products.getProducts())
+        .map(ProductModel::getPrice)
         .as("[price] of products(s) is null")
-        .isTrue();
+        .doesNotContainNull();
 
     //every product has not at least one [image]
-    softAssertions.assertThat(products.getProducts().stream()
-            .allMatch(product -> product.getImages().size() > 0))
-        .as("Product(s) doesn't have [image]");
+    softAssertions.assertThat(products.getProducts())
+        .map(ProductModel::getImages)
+        .as("Product(s) doesn't have [image]")
+        .allMatch(pics -> !pics.isEmpty());
 
     softAssertions.assertAll();
   }

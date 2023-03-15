@@ -2,6 +2,7 @@ import static endpoints.Endpoints.PRODUCTS_SEARCH;
 
 import io.restassured.RestAssured;
 import java.util.Objects;
+import models.products.ProductModel;
 import models.products.ProductResponseModel;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
@@ -22,13 +23,12 @@ public class SearchProductTest extends BaseTest {
 
     SoftAssertions softAssertions = new SoftAssertions();
     //product titles are [Samsung Universe 9, Samsung Galaxy Book]
-    softAssertions.assertThat(products.getProducts().stream().anyMatch(product -> Objects.equals(
-            product.getTitle(), "Samsung Universe 9") || Objects.equals(product.getTitle(),
-            "Samsung Galaxy Book")))
+    softAssertions.assertThat(products.getProducts())
+        .map(ProductModel::getTitle)
         .as("Product [title]s do(es) not match to expected")
-        .isTrue();
-    //total 2
+        .contains("Samsung Universe 9", "Samsung Galaxy Book");
 
+    //total 2
     softAssertions.assertThat(products.getProducts().size())
         .as("Product [total] is not as expected")
         .isEqualTo(2);
