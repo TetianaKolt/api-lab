@@ -1,3 +1,5 @@
+import static endpoints.Endpoints.PRODUCTS;
+
 import io.restassured.RestAssured;
 import models.products.ProductModel;
 import models.products.ProductResponseModel;
@@ -9,7 +11,7 @@ public class ProductListTest extends BaseTest {
   @Test
   public void checkProductList() {
     ProductResponseModel products = RestAssured.given()
-        .get("/products")
+        .get(PRODUCTS)
         .then()
         .statusCode(200)
         .extract()
