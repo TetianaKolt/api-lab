@@ -1,28 +1,28 @@
-import static endpoints.Endpoints.CART_BY_ID;
+import static framework.services.ShopServices.getCartById;
 
-import io.restassured.RestAssured;
 import java.util.List;
 import java.util.stream.Collectors;
-import models.cart.CartModel;
-import models.cart.CartModel.ProductInCartModel;
+import framework.models.cart.CartModel;
+import framework.models.cart.CartModel.ProductInCartModel;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 public class GetCartTest extends BaseTest {
 
   @Test
-  public void getCartById() {
+  public void getCartByIdTest() {
     int cartId = 1;
 
-    final CartModel cartModel = RestAssured
-        .given()
-        .pathParams("cart_id", cartId)
-        .get(CART_BY_ID)
-        .then()
-        .statusCode(200)
-        .extract()
-        .body()
-        .as(CartModel.class);
+    final CartModel cartModel = getCartById(cartId);
+//        RestAssured
+//        .given()
+//        .pathParams("cart_id", cartId)
+//        .get(CART_BY_ID)
+//        .then()
+//        .statusCode(200)
+//        .extract()
+//        .body()
+//        .as(CartModel.class);
 
     SoftAssertions softAssertions = new SoftAssertions();
     //id = 1

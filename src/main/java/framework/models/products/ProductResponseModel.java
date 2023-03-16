@@ -1,4 +1,4 @@
-package models.products;
+package framework.models.products;
 
 import java.util.List;
 import lombok.Data;
@@ -12,7 +12,5 @@ public class ProductResponseModel {
   private Integer limit;
   private Boolean isDeleted;
   private String deletedOn;
-
-
 
 }

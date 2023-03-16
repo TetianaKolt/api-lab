@@ -1,4 +1,4 @@
-package models.cart;
+package framework.models.cart;
 
 import java.util.List;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package models.login;
+package framework.models.login;
 
 import lombok.Data;
 

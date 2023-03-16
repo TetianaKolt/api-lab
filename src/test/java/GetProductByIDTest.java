@@ -1,7 +1,9 @@
-import static endpoints.Endpoints.PRODUCT_BY_ID;
+import static framework.endpoints.Endpoints.PRODUCT_BY_ID;
+import static framework.services.ShopServices.getProductById;
 
+import framework.services.ShopServices;
 import io.restassured.RestAssured;
-import models.products.ProductModel;
+import framework.models.products.ProductModel;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
@@ -9,15 +11,7 @@ public class GetProductByIDTest extends BaseTest {
 
   @Test
   public void getSingleProductById() {
-    ProductModel product = RestAssured
-        .given()
-        .pathParams("product_id", 10)
-        .get(PRODUCT_BY_ID)
-        .then()
-        .statusCode(200)
-        .extract()
-        .body()
-        .as(ProductModel.class);
+    ProductModel product = getProductById(10);
 
     SoftAssertions softAssertions = new SoftAssertions();
     //    id = 10

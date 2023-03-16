@@ -1,15 +1,14 @@
-import static endpoints.Endpoints.PRODUCTS_ADD;
+import static framework.services.ShopServices.addNewProduct;
 
-import io.restassured.RestAssured;
 import java.util.Arrays;
-import models.products.ProductModel;
+import framework.models.products.ProductModel;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 public class AddNewProductTest extends BaseTest {
   @Test
-  public void addNewProduct() {
-    final ProductModel productModel = ProductModel.builder()
+  public void addNewProductTest() {
+     final ProductModel productModel = ProductModel.builder()
         .title("MacBook Air Pro")
         .price(1500)
         .stock(150)
@@ -22,15 +21,7 @@ public class AddNewProductTest extends BaseTest {
         .category("laptops")
         .build();
 
-    ProductModel myProduct = RestAssured
-        .given()
-        .body(productModel)
-        .post(PRODUCTS_ADD)
-        .then()
-        .statusCode(200)
-        .extract()
-        .body()
-        .as(ProductModel.class);
+    ProductModel myProduct = addNewProduct(productModel);
 
     SoftAssertions softAssertions = new SoftAssertions();
 

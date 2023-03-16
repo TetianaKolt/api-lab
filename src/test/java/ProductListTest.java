@@ -1,8 +1,10 @@
-import static endpoints.Endpoints.PRODUCTS;
+import static framework.endpoints.Endpoints.PRODUCTS;
+import static framework.services.ShopServices.getProducts;
 
+import framework.models.products.ProductResponseModel;
 import io.restassured.RestAssured;
-import models.products.ProductModel;
-import models.products.ProductResponseModel;
+import framework.models.products.ProductModel;
+import framework.models.products.ProductDeleteResponseModel;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
@@ -10,13 +12,7 @@ public class ProductListTest extends BaseTest {
 
   @Test
   public void checkProductList() {
-    ProductResponseModel products = RestAssured.given()
-        .get(PRODUCTS)
-        .then()
-        .statusCode(200)
-        .extract()
-        .body()
-        .as(ProductResponseModel.class);
+    ProductResponseModel products = getProducts();
 
     SoftAssertions softAssertions = new SoftAssertions();
     softAssertions.assertThat(products.getTotal())

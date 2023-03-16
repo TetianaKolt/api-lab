@@ -1,8 +1,8 @@
-import static endpoints.Endpoints.AUTH_LOGIN;
+import static framework.endpoints.Endpoints.AUTH_LOGIN;
 
 import io.restassured.RestAssured;
-import models.login.LoginRequestModel;
-import models.login.LoginResponseModel;
+import framework.models.login.LoginRequestModel;
+import framework.models.login.LoginResponseModel;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 

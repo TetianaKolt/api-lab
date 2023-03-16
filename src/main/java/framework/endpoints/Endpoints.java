@@ -1,4 +1,4 @@
-package endpoints;
+package framework.endpoints;
 
 import lombok.Data;
 import lombok.Getter;
