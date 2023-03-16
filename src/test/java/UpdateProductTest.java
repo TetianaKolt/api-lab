@@ -18,7 +18,7 @@ public class UpdateProductTest extends BaseTest{
 //        .extract()
 //        .body()
 //        .as(ProductModel.class);
-
+//
 
    ProductModel productModelToUpdate
        = ProductModel
