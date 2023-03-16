@@ -1,4 +1,5 @@
 import static framework.endpoints.Endpoints.AUTH_LOGIN;
+import static framework.services.ShopServices.logIn;
 
 import io.restassured.RestAssured;
 import framework.models.login.LoginRequestModel;
@@ -14,15 +15,16 @@ public class FirstTest extends BaseTest {
 
     LoginRequestModel requestModel = new LoginRequestModel("hbingley1", "CQutx25i8r");
 
-    LoginResponseModel loginResponseModel = RestAssured
-        .given()
-        .body(requestModel)
-        .post(AUTH_LOGIN)
-        .then()
-        .statusCode(200)
-        .extract()
-        .body()
-        .as(LoginResponseModel.class);
+    LoginResponseModel loginResponseModel = logIn(requestModel);
+//        RestAssured
+//        .given()
+//        .body(requestModel)
+//        .post(AUTH_LOGIN)
+//        .then()
+//        .statusCode(200)
+//        .extract()
+//        .body()
+//        .as(LoginResponseModel.class);
 
     SoftAssertions softAssertions = new SoftAssertions();
 

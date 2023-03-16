@@ -1,5 +1,6 @@
 package framework.services;
 
+import static framework.endpoints.Endpoints.AUTH_LOGIN;
 import static framework.endpoints.Endpoints.CART_BY_ID;
 import static framework.endpoints.Endpoints.PRODUCTS;
 import static framework.endpoints.Endpoints.PRODUCTS_ADD;
@@ -8,6 +9,8 @@ import static framework.endpoints.Endpoints.PRODUCT_BY_ID;
 import static io.restassured.RestAssured.given;
 
 import framework.models.cart.CartModel;
+import framework.models.login.LoginRequestModel;
+import framework.models.login.LoginResponseModel;
 import framework.models.products.ProductDeleteResponseModel;
 import framework.models.products.ProductModel;
 import framework.models.products.ProductResponseModel;
@@ -21,6 +24,16 @@ public class ShopServices {
         .pathParams("product_id", id)
         .get(PRODUCT_BY_ID)
         .then();
+  }
+  public static LoginResponseModel logIn(LoginRequestModel requestModel) {
+    return given()
+            .body(requestModel)
+            .post(AUTH_LOGIN)
+            .then()
+            .statusCode(200)
+            .extract()
+            .body()
+            .as(LoginResponseModel.class);
   }
 
   public static ProductModel updateProductById(int id, ProductModel productBodyToUpdate) {
