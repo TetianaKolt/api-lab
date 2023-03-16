@@ -77,7 +77,8 @@ public class GetCartTest extends BaseTest {
     //[total] of every product should calculate as [price] * [quantity] ???????????????????????????
     softAssertions.assertThat(cartModelsList)
         .map(pr -> pr.getPrice() * pr.getQuantity())
-        .as("Cart contains wrong calculation in [total]: it has to be [price] * [quantity]")
+        .as("Cart contains wrong calculation in [total]: "
+            + "it has to be [price] * [quantity]")
         .isEqualTo((cartModelsList
             .stream()
             .map(ProductInCartModel::getTotal)
@@ -88,7 +89,8 @@ public class GetCartTest extends BaseTest {
     softAssertions.assertThat(cartModelsList)
         .map(pr -> (int) Math.round(
             pr.getTotal() - (pr.getTotal() * pr.getDiscountPercentage() / 100)))
-        .as("Cart contains wrong calculation in [discountedPrice]: it has to be [total] * [discountPercentage] - [total]")
+        .as("Cart contains wrong calculation in [discountedPrice]: "
+            + "it has to be [total] * [discountPercentage] - [total]")
         .isEqualTo((cartModelsList
             .stream()
             .map(ProductInCartModel::getDiscountedPrice)
